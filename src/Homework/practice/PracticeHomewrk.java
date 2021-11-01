@@ -37,9 +37,9 @@ public class PracticeHomewrk {
     //    վերադարձնել ընդունվող բուլյանի ժխտված արժեքը
     boolean reverseBool(boolean value) {
         if (value == true) {
-            return false;
+            return !value;
         } else
-            return true;
+            return !value;
     }
 
     //    վերադարձնել երկու մասիվի ամենամեծ lenght-ը

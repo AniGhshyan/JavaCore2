@@ -14,8 +14,10 @@ public class CharArrayTest {
         char[] babola = {'b', 'a', 'b', 'o', 'l', 'a'};
         charArray.bob(babola);
         System.out.println(charArray.bob(babola));
-        char[] text = {' ', ' ', 'b', 'a', 'r', 'e', 'v', ' ', ' '};
-        charArray.trim(text);
-
+        char[] text = {' ', ' ', 'b', 'a', ' ', 'r', ' ', 'e', 'v', ' ', ' '};
+        char[] resalt = charArray.trim(text);
+        for (char c : resalt) {
+            System.out.print(c);
+        }
     }
 }
