@@ -13,7 +13,7 @@ public class CharArray {
         System.out.println("'o' սինվոլի քանակը = " + num);
     }
 
-    void falseOrtrue(char[] bolola) {
+    boolean falseOrtrue(char[] bolola) {
         boolean k = false;
         for (int i = 0; i < bolola.length; i++) {
             if (bolola[bolola.length - 1] == 'y' && bolola[bolola.length - 2] == 'y') {
@@ -21,10 +21,11 @@ public class CharArray {
             }
 
         }
-        System.out.println(k);
+        return k;
+
     }
 
-    void bob(char[] babola) {
+    boolean bob(char[] babola) {
         boolean bob = false;
         for (int i = 0; i < babola.length - 2; i++) {
             if (babola[i] == 'b' && babola[i + 2] == 'b') {
@@ -32,10 +33,11 @@ public class CharArray {
                 break;
             }
         }
-        System.out.println(bob);
+        return bob;
+
     }
 
-    void barev(char[] text) {
+    char[] trim(char[] text) {
         int startIndex = 0;
         int endIndex = text.length - 1;
         while (startIndex < endIndex && text[startIndex] == ' ') {
@@ -50,8 +52,8 @@ public class CharArray {
         for (int i = startIndex; i <= endIndex; i++) {
             result[index++] = text[i];
         }
-        for (int i = 0; i < result.length; i++) {
-            System.out.print(result[i]);
-        }
+        return result;
     }
 }
+
+
