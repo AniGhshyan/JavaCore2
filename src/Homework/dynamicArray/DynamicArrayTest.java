@@ -5,16 +5,18 @@ import java.util.Scanner;
 public class DynamicArrayTest {
 
     public static void main(String[] args) {
-//        Scanner scanner=new Scanner(System.in);
         DynamicArray da = new DynamicArray();
-        for (int i = 0; i < 10; i++) {
-            da.add(i);
-        }
-        for (int i =10; i < 20; i++) {
-            da.add(i);
-
-        }
-        System.out.println(da.getByIndex(5));
+        System.out.println(da.isEmpty());
+        da.add(5);
+        int[] numbers = {33, 44, 55};
+        da.add(numbers);
         da.print();
+        da.add(66,2);
+        da.print();
+        da.set(2,3);
+        da.print();
+        System.out.println(da.isEmpty());
+        System.out.println(da.isExists(66));
+        System.out.println(da.isExists(88));
     }
 }

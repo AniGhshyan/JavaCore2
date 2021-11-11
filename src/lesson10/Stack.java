@@ -1,14 +1,19 @@
 package lesson10;
 
 public class Stack {
-    int array[] = new int[10];
-    int index;
+    public char array[] = new char[10];
+    public int index;
 
-    Stack() {
+//    public Stack(int lenght) {
+//        char array[] = new char[lenght];
+//        index = -1;
+//    }
+
+    public Stack() {
         index = -1;
     }
 
-    void push(int item) {
+    public void push(char item) {
         if (index == 9) {
             System.out.println("Stack is full");
 
@@ -18,13 +23,18 @@ public class Stack {
 
     }
 
-    int pop() {
+    public char pop() {
         if (index < 0) {
-            System.out.println("Stack is enpty");
+//            System.out.println("Stack is enpty");
             return 0;
         } else {
             return array[index--];
         }
 
     }
+
+    public boolean isEmpty() {
+        return index == -1;
+    }
+
 }
