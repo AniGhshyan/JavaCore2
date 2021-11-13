@@ -15,47 +15,60 @@ public class BrackeChecker {
 
     //    սա հիմնական մեթոդն է ,որի մեջ գռելու ենք ամբողջ լոգիկան ․աշխատոլու ենք թե stack-ի հետ, թե վերևի text-ի հետ
     public void check() {
-        char[] chars = text.toCharArray();
         Stack stack = new Stack();
-        for (int i = 0; i < chars.length; i++) {
-            switch (chars[i]) {
+        int pop;
+        boolean isValid = true;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            switch (c) {
                 case '(':
                 case '[':
                 case '{':
-                    stack.push(chars[i]);
+                    stack.push(c);
+                    break;
+                case ')':
+                    pop = stack.pop();
+                    if (pop == 0) {
+                        isValid = false;
+                        System.err.println("Error Closed " + c + " but nothing opened at " + i);
+                    } else if (pop != '(') {
+                        isValid = false;
+                        System.err.println("Error:Closed " + c + "but opened " + (char) pop + "at " + i);
+                    }
                     break;
                 case '}':
-                    char c = stack.pop();
-                    if (stack.isEmpty()) {
-                        System.out.println("Erroe there are not opened brackes");break;
-                    } else if (c != '{') {
-                        System.err.println("Error: opened " + c + " closed " + chars[i] + " " + i);
+                    pop = stack.pop();
+                    if (pop == 0) {
+                        isValid = false;
+                        System.err.println("Error Closed " + c + " but nothing opened at " + i);
+                    } else if (pop != '{') {
+                        isValid = false;
+                        System.err.println("Error:Closed " + c + "but opened " + (char) pop + "at " + i);
                     }
                     break;
                 case ']':
-                    char b = stack.pop();
-                    if (stack.isEmpty()) {
-                        System.out.println("Erroe there are not opened brackes");break;
-                    } else if (b != '[') {
-                        System.err.println("Error: opened " + b + " closed " + chars[i] + " " + i);
+                    pop = stack.pop();
+                    if (pop == 0) {
+                        isValid = false;
+                        System.err.println("Error Closed " + c + " but nothing opened at " + i);
+                    } else if (pop != '[') {
+                        isValid = false;
+                        System.err.println("Error:Closed " + c + "but opened " + (char) pop + "at " + i);
                     }
                     break;
-
-                case ')':
-                    char a = stack.pop();
-                    if (stack.isEmpty()) {
-                        System.out.println("Erroe there are not opened brackes");break;
-                    }
-                    else if (a != '(') {
-                        System.err.println("Error: opened " + a + "closed " + chars[i] + " " + i);
-                    }
-                    break;
-                default:
-                    break;}}
-        if (!stack.isEmpty()){
-            System.out.println("There are not closed brackes");
-        }else {
-            System.out.println("The text is ok");
+            }
+        }
+//        int last;
+//        while ((last = stack.pop()) != 0) {
+//            isValid = false;
+//            System.err.println("Error: opened " + (char) last + "but nothing closed");
+//        }
+        while (!stack.isEmpty()) {
+            isValid = false;
+            System.err.println("Error:opened " + (char) stack.pop() + " but nothing closed");
+        }
+        if (isValid) {
+            System.out.println("Everything is good");
         }
 
     }

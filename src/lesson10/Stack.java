@@ -1,7 +1,7 @@
 package lesson10;
 
 public class Stack {
-    public char array[] = new char[10];
+    public int array[] = new int[10];
     public int index;
 
 //    public Stack(int lenght) {
@@ -13,7 +13,7 @@ public class Stack {
         index = -1;
     }
 
-    public void push(char item) {
+    public void push(int item) {
         if (index == 9) {
             System.out.println("Stack is full");
 
@@ -23,7 +23,7 @@ public class Stack {
 
     }
 
-    public char pop() {
+    public int pop() {
         if (index < 0) {
 //            System.out.println("Stack is enpty");
             return 0;
