@@ -6,7 +6,9 @@ public class AuthorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         AuthorStorage authorStorage = new AuthorStorage();
-        for (int i = 0; i < 5; i++) {
+        System.out.println("Քանի հեղինակ ունեք");
+        int cuantity = scanner.nextInt();
+        for (int i = 0; i < cuantity; i++) {
             System.out.println("name: ");
             String name = scanner.next();
             System.out.println("surname: ");
