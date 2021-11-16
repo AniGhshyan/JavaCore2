@@ -10,22 +10,24 @@ public class AuthorTest {
         AuthorStorage authorStorage = new AuthorStorage();
         authorStorage.add(authors1);
         authorStorage.add(authors2);
+        Author author3 = new Author();
+        author3.setName("Davit");
+        author3.setSurname("Davtyan");
+        author3.setAge(30);
+        author3.setEmail("davuk");
+        author3.setGendre("boy");
+        authorStorage.add(author3);
         System.out.println("Քանի հեղինակ ունենք");
         System.out.println(authorStorage.size);
         int num = scanner.nextInt();
-        if (num < 0 || num > authorStorage.size) {
-            System.out.println("Այսպիսի հեղինակ չունենք");
+        for (int i = 1; i <= 5; i++) {
+                if (num < 0 || num > authorStorage.size) {
+                    System.out.println("Այսպիսի հեղինակ չունենք");
+                    break;
+                }
+                else authorStorage.print();break;
         }
-        switch (num){
-            case 1:
-                System.out.println(authors1);
-                break;
-            case 2:
-                System.out.println(authors2);
-                break;
-            case 3:
-
-        }
-
     }
 }
+
+
