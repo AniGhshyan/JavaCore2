@@ -16,8 +16,6 @@ public class Author {
     }
 
     public Author() {
-
-
     }
 
     public String getName() {
@@ -40,7 +38,9 @@ public class Author {
         return email;
     }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getAge() {
         return age;
@@ -55,7 +55,7 @@ public class Author {
     }
 
     public void setGendre(String gendre) {
-        this.gender= gendre;
+        this.gender = gendre;
     }
 
     @Override
