@@ -75,59 +75,31 @@ public class AuthorBookTest {
     private static void changeBookAuthor() {
         System.out.println("Please input book's title");
         String title = scanner.nextLine();
-        if (!bookStorage.getByTitle(title).getTitle().equals(title)) {
-            System.out.println("There is no such book");
-        } else {
-            System.out.println("please input autor's name: ");
-            String name = scanner.nextLine();
-            authorStorage.changeName(name);
-            System.out.println("please input author's surname: ");
-            String surname = scanner.nextLine();
-            authorStorage.changeSurnam(surname);
-            System.out.println("pleaze input author's email");
-            String email = scanner.nextLine();
-            authorStorage.changeEmail(email);
-            System.out.println("please input author's age: ");
-            int age = Integer.parseInt(scanner.nextLine());
-            authorStorage.changeAge(age);
-            System.out.println("please input author's gender: ");
-            String gender = scanner.nextLine();
-            authorStorage.changeGender(gender);
-            Author author=new Author(name,surname,email,age,gender);
-
-            if (authorStorage.getByEmail(author.getEmail()).equals(email)) {
-                System.out.println("ther is such book");
-            } else {
-                bookStorage.changeBookAothor(name, surname, email, age, gender);
-            }
+        if (bookStorage.getByTitle(title) != null) {
+            changeAuthor();
         }
-
-
     }
 
-
     private static void changeAuthor() {
-        System.out.println("please input email");
+        System.out.println("please input author's email");
         String email = scanner.nextLine();
-        if (authorStorage.getByEmail(email).getEmail().equals(email)) {
+        if (authorStorage.getByEmail(email) != null) {
             System.out.println(authorStorage.getByEmail(email));
             System.out.println("please input author's name: ");
             String name = scanner.nextLine();
-            authorStorage.changeName(name);
+            authorStorage.getByEmail(email).setName(name);
             System.out.println("please input author's surname: ");
             String surname = scanner.nextLine();
-            authorStorage.changeSurnam(surname);
+            authorStorage.getByEmail(email).setSurname(surname);
             System.out.println("please input author's age: ");
             int age = Integer.parseInt(scanner.nextLine());
-            authorStorage.changeAge(age);
+            authorStorage.getByEmail(email).setAge(age);
             System.out.println("please input author's gender: ");
             String gender = scanner.nextLine();
-            authorStorage.changeGender(gender);
-            Author author = new Author(name, surname, email, age, gender);
-            System.out.println(authorStorage.getByEmail(email));
-
+            authorStorage.getByEmail(email).setGendre(gender);
+        } else {
+            addAuthor();
         }
-
     }
 
     private static void countBookByAuthor() {

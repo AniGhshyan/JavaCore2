@@ -33,7 +33,7 @@ public class BookStorage {
 
     public void searchBooksByAuthor(String email) {
         for (int i = 0; i < size; i++) {
-            if (books[i].getAuthor().getEmail().contains(email)) {
+            if (books[i].getAuthor().getEmail().equals(email)) {
                 System.out.println(books[i]);
             }
 
@@ -43,15 +43,11 @@ public class BookStorage {
     public void countBook(String email) {
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (books[i].getAuthor().getEmail().contains(email)) {
-                if (books[i].getTitle() != null) {
-                    count = books[i].getCount();
-                } else {
-                    System.out.println("do not have a book yet");
-                }
+            if (books[i].getAuthor().getEmail().equals(email)) {
+                count = books[i].getCount();
             }
         }
-        System.out.println("This author has " + count + " books");
+        System.out.println("This author has " + count + " of books");
     }
 
 
@@ -67,7 +63,7 @@ public class BookStorage {
 
     public void changeBookAothor(String name, String surname, String email, int age, String gender) {
         for (int i = 0; i < size; i++) {
-            Author author=new Author(name,surname,email,age,gender);
+            Author author = new Author(name, surname, email, age, gender);
             books[i].setAuthor(author);
         }
     }

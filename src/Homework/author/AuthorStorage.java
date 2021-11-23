@@ -49,34 +49,4 @@ public class AuthorStorage {
         return null;
     }
 
-
-    public void changeName(String name) {
-        for (int i = 0; i < size; i++) {
-            authors[i].setName(name);
-        }
-    }
-
-    public void changeSurnam(String surname) {
-        for (int i = 0; i < size; i++) {
-            authors[i].setSurname(surname);
-        }
-    }
-
-    public void changeAge(int age) {
-        for (int i = 0; i < size; i++) {
-            authors[i].setAge(age);
-        }
-    }
-
-    public void changeGender(String gender) {
-        for (int i = 0; i < size; i++) {
-            authors[i].setGendre(gender);
-        }
-    }
-
-    public void changeEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            authors[i].setEmail(email);
-        }
-    }
 }

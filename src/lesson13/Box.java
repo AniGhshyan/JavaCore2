@@ -1,9 +1,15 @@
-package lesson12;
+package lesson13;
 
 public class Box {
-    double width;
-    double height;
-    double depth;
+   private double width;
+    private double height;
+    private double depth;
+
+    Box(Box ob) {
+        width = ob.width;
+        height = ob.height;
+        depth = ob.depth;
+    }
 
     Box(double w, double h, double d) {
         width = w;
@@ -17,13 +23,9 @@ public class Box {
         depth = -1;
     }
 
-    Box(Box ob) {
-        width = ob.width;
-        height = ob.height;
-        depth = ob.depth;
-    }
 
     Box(double len) {
+
         width = height = depth = len;
     }
 
