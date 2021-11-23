@@ -5,12 +5,14 @@ public class Book {
     private String descriptioan;
     private double price;
     private int count;
+    private Author author;
 
-    public Book(String title, String descriptioan, double price, int count) {
+    public Book(String title, String descriptioan, double price, int count, Author author) {
         this.title = title;
         this.descriptioan = descriptioan;
         this.price = price;
         this.count = count;
+        this.author = author;
     }
 
     public Book() {
@@ -45,6 +47,14 @@ public class Book {
         return count;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     public void setCount(int count) {
         this.count = count;
     }
@@ -56,6 +66,7 @@ public class Book {
                 ", descriptioan='" + descriptioan + '\'' +
                 ", price=" + price +
                 ", count=" + count +
+                ", author=" + author +
                 '}';
     }
 }
