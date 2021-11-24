@@ -44,10 +44,12 @@ public class BookStorage {
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (books[i].getAuthor().getEmail().equals(email)) {
-                count = books[i].getCount();
+                count++;
+
             }
+
         }
-        System.out.println("This author has " + count + " of books");
+        System.out.println("This author has " + count + " books");
     }
 
 
@@ -58,13 +60,5 @@ public class BookStorage {
             }
         }
         return null;
-    }
-
-
-    public void changeBookAothor(String name, String surname, String email, int age, String gender) {
-        for (int i = 0; i < size; i++) {
-            Author author = new Author(name, surname, email, age, gender);
-            books[i].setAuthor(author);
-        }
     }
 }
