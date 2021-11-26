@@ -19,6 +19,9 @@ public class AuthorBookTest {
     private static final String COUNT_BOOKS_BY_AUTHOR = "9";
     private static final String CHANGE_AUTHOR = "10";
     private static final String CHANGE_BOOK_AUTHOR = "11";
+    private static final String DELETE_BY_AUTHOR = "12";
+    private static final String DELETE_AUTHOR = "13";
+    private static final String DELETE_BOOK = "14";
 
 
     public static void main(String[] args) {
@@ -66,9 +69,49 @@ public class AuthorBookTest {
                 case CHANGE_BOOK_AUTHOR:
                     changeBookAuthor();
                     break;
+                case DELETE_BY_AUTHOR:
+                    deleteByAuthor();
+                    break;
+                case DELETE_AUTHOR:
+                    deleteAuthor();
+                    break;
+                case DELETE_BOOK:
+                    deleteBook();
+                    break;
                 default:
                     System.out.println("Invalid command!");
             }
+        }
+    }
+
+    private static void deleteBook() {
+        System.out.println("Please input book's title");
+        String title = scanner.nextLine();
+        if (bookStorage.getByTitle(title) != null) {
+            bookStorage.deleteBook(title);
+        } else {
+            System.out.println("invalid email");
+        }
+
+    }
+
+    private static void deleteByAuthor() {
+        System.out.println("please input author's email");
+        String email = scanner.nextLine();
+        if (authorStorage.getByEmail(email) != null) {
+            bookStorage.deleteByAuthor(email);
+        } else {
+            System.out.println("invalid email");
+        }
+    }
+
+    private static void deleteAuthor() {
+        System.out.println("please input author's email");
+        String email = scanner.nextLine();
+        if (authorStorage.getByEmail(email) != null) {
+            authorStorage.deleteAuthor(email);
+        } else {
+            System.out.println("invalid email");
         }
     }
 
@@ -86,12 +129,12 @@ public class AuthorBookTest {
                 System.out.println("please input author's surname: ");
                 String surname = scanner.nextLine();
                 System.out.println("please input author's email");
-                String email1=scanner.nextLine();
+                String email1 = scanner.nextLine();
                 System.out.println("please input author's age: ");
                 int age = Integer.parseInt(scanner.nextLine());
                 System.out.println("please input author's gender: ");
                 String gender = scanner.nextLine();
-                Author author=new Author(name,surname,email,age,gender);
+                Author author = new Author(name, surname, email, age, gender);
                 byTitle.setAuthor(author);
             }
         }
@@ -186,6 +229,9 @@ public class AuthorBookTest {
         System.out.println("please input " + COUNT_BOOKS_BY_AUTHOR + " for count book by authors");
         System.out.println("please input " + CHANGE_AUTHOR + " for change author's information");
         System.out.println("please input " + CHANGE_BOOK_AUTHOR + " for change author");
+        System.out.println("please input " + DELETE_BY_AUTHOR + " for delete book by author");
+        System.out.println("please input " + DELETE_AUTHOR + " for delete author");
+        System.out.println("please input " + DELETE_BOOK + " for delete book");
     }
 
     private static void searchByName() {
