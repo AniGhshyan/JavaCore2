@@ -49,16 +49,16 @@ public class AuthorStorage {
         return null;
     }
 
-    public void deleteAuthor(String email) {
+    public void delete(Author author) {
         for (int i = 0; i < size; i++) {
-            if (authors[i].getEmail().equals(email)){
-                for (int j = i+1; j <size; j++) {
-                    authors[j-1] = authors[j];
-                }
+            if (authors[i].equals(author)) {
+                ArrayUtil.deleteByIndex(authors, i, size);
+                size--;
+                break;
             }
 
         }
-        size--;
+
     }
 }
 

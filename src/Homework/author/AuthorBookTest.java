@@ -85,63 +85,73 @@ public class AuthorBookTest {
     }
 
     private static void deleteBook() {
-        System.out.println("Please input book's title");
-        String title = scanner.nextLine();
-        if (bookStorage.getByTitle(title) != null) {
-            bookStorage.deleteBook(title);
+        System.out.println("Please choose book by serial id");
+        System.out.println("-------");
+        bookStorage.print();
+        System.out.println("-------");
+        String serialId = scanner.nextLine();
+        Book book = bookStorage.getBySerailId(serialId);
+        if (book != null) {
+            bookStorage.delete(book);
         } else {
-            System.out.println("invalid email");
+            System.out.println("Book with serail Id does not exists");
         }
 
     }
 
     private static void deleteByAuthor() {
-        System.out.println("please input author's email");
+        printAuthorsList();
         String email = scanner.nextLine();
-        if (authorStorage.getByEmail(email) != null) {
-            bookStorage.deleteByAuthor(email);
+        Author author = authorStorage.getByEmail(email);
+        if (author != null) {
+            bookStorage.deleteByAuthor(author);
         } else {
-            System.out.println("invalid email");
+            System.out.println("Authore does not exists");
         }
     }
 
+    private static void printAuthorsList() {
+        System.out.println("please choose author's email");
+        System.out.println("--------");
+        authorStorage.print();
+        System.out.println("--------");
+
+    }
+
     private static void deleteAuthor() {
-        System.out.println("please input author's email");
+        printAuthorsList();
         String email = scanner.nextLine();
-        if (authorStorage.getByEmail(email) != null) {
-            authorStorage.deleteAuthor(email);
+        Author author = authorStorage.getByEmail(email);
+        if (author != null) {
+            authorStorage.delete(author);
         } else {
-            System.out.println("invalid email");
+            System.err.println("Author does not exists");
         }
     }
 
     private static void changeBookAuthor() {
-        System.out.println("Please input book's title");
-        String title = scanner.nextLine();
-        Book byTitle = bookStorage.getByTitle(title);
-        if (byTitle != null) {
-            System.out.println("please input author's email");
+        System.out.println("Please choose book's serialId");
+        System.out.println("-----");
+        bookStorage.print();
+        System.out.println("-----");
+        String serialId = scanner.nextLine();
+        Book book = bookStorage.getByTitle(serialId);
+        if (book != null) {
+            printAuthorsList();
             String email = scanner.nextLine();
-            byTitle.getAuthor();
-            if (byTitle.getAuthor() != null) {
-                System.out.println("please input author's name: ");
-                String name = scanner.nextLine();
-                System.out.println("please input author's surname: ");
-                String surname = scanner.nextLine();
-                System.out.println("please input author's email");
-                String email1 = scanner.nextLine();
-                System.out.println("please input author's age: ");
-                int age = Integer.parseInt(scanner.nextLine());
-                System.out.println("please input author's gender: ");
-                String gender = scanner.nextLine();
-                Author author = new Author(name, surname, email, age, gender);
-                byTitle.setAuthor(author);
+            Author author = authorStorage.getByEmail(email);
+            if (author != null) {
+                book.setAuthor(author);
+            } else {
+                System.err.println("Author does not exists");
             }
+        } else {
+            System.err.println("Book with serial Id does not exists");
         }
     }
 
     private static void changeAuthor() {
-        System.out.println("please input author's email");
+        printAuthorsList();
         String email = scanner.nextLine();
         Author author = authorStorage.getByEmail(email);
         if (author != null) {
@@ -159,20 +169,31 @@ public class AuthorBookTest {
             String gender = scanner.nextLine();
             author.setGendre(gender);
         } else {
-            addAuthor();
+            System.err.println("Author does not exists");
         }
     }
 
     private static void countBookByAuthor() {
-        System.out.println("please input author's email");
+        printAuthorsList();
         String email = scanner.nextLine();
-        bookStorage.countBook(email);
+        Author author = authorStorage.getByEmail(email);
+        if (author != null) {
+            bookStorage.countByAuthor(author);
+        } else {
+            System.out.println("Author does not exists");
+        }
+
     }
 
     private static void serarchBooksByAuthor() {
-        System.out.println("please input autor's email");
+        printAuthorsList();
         String email = scanner.nextLine();
-        bookStorage.searchBooksByAuthor(email);
+        Author author = authorStorage.getByEmail(email);
+        if (author != null) {
+            bookStorage.serachByAuthor(author);
+        } else {
+            System.out.println("Author does not exists");
+        }
     }
 
     private static void searchBooksBYTitle() {
@@ -182,28 +203,33 @@ public class AuthorBookTest {
     }
 
     private static void addBook() {
-        System.out.println("please choose autors's email");
-        System.out.println("-----");
-        authorStorage.print();
-        System.out.println("-----");
+        printAuthorsList();
         String email = scanner.nextLine();
         Author author = authorStorage.getByEmail(email);
         if (author != null) {
-            System.out.println("please input book's title: ");
-            String title = scanner.nextLine();
-            System.out.println("please input book's description: ");
-            String description = scanner.nextLine();
-            System.out.println("please input book's price: ");
-            double price = Double.parseDouble(scanner.nextLine());
-            System.out.println("please input book's count: ");
-            int count = Integer.parseInt(scanner.nextLine());
-            Book book = new Book(title, description, price, count, author);
-            bookStorage.add(book);
-            System.out.println("Thank you,book was added");
+            System.out.println("please input book's serialId: ");
+            String serialId = scanner.nextLine();
+            if (bookStorage.getBySerailId(serialId) != null) {
+                System.out.println("please input book's title: ");
+                String title = scanner.nextLine();
+                System.out.println("please input book's description: ");
+                String description = scanner.nextLine();
+                System.out.println("please input book's price: ");
+                double price = Double.parseDouble(scanner.nextLine());
+                System.out.println("please input book's count: ");
+                int count = Integer.parseInt(scanner.nextLine());
+                Book book = new Book(serialId, title, description, price, count, author);
+                bookStorage.add(book);
+                System.out.println("Thank you,book was added");
+            } else {
+                System.out.println("Book with SerialId: " + serialId + " is exists");
+                addBook();
+            }
         } else {
             System.out.println("invalid email! please try again");
             addBook();
         }
+
 
     }
 
@@ -217,7 +243,7 @@ public class AuthorBookTest {
     }
 
     private static void pritCommands() {
-        System.out.println("please input " + EXIT + " for EXIT");
+        System.out.println("\u001B[34m" + "please input " + EXIT + " for EXIT");
         System.out.println("please input " + ADD_AUTHORS + " for author");
         System.out.println("please input " + ADD_BOOK + " for book");
         System.out.println("please input " + SEARCH_AUTHORS + " for search author by name");
@@ -231,7 +257,7 @@ public class AuthorBookTest {
         System.out.println("please input " + CHANGE_BOOK_AUTHOR + " for change author");
         System.out.println("please input " + DELETE_BY_AUTHOR + " for delete book by author");
         System.out.println("please input " + DELETE_AUTHOR + " for delete author");
-        System.out.println("please input " + DELETE_BOOK + " for delete book");
+        System.out.println("please input " + DELETE_BOOK + " for delete book" + "\u001B[0m");
     }
 
     private static void searchByName() {
@@ -241,26 +267,29 @@ public class AuthorBookTest {
     }
 
     private static void addAuthor() {
-        System.out.println("please input autor's name: ");
-        String name = scanner.nextLine();
-        System.out.println("please input autor's surname: ");
-        String surname = scanner.nextLine();
-        System.out.println("please input autor's email: ");
-        String email = scanner.nextLine();
-        System.out.println("please input autor's age: ");
-        int age = Integer.parseInt(scanner.nextLine());
-        System.out.println("please input autor's gemder: ");
-        String gender = scanner.nextLine();
+        System.out.println("please input autor's name,surname,email,gender,age");
+        String authorDataStr = scanner.nextLine();
+        String[] authorData = authorDataStr.split(",");
+        if (authorData.length == 5) {
+            int age = Integer.parseInt(authorData[4]);
+            Author author = new Author(authorData[0], authorData[1], authorData[2], age, authorData[3]);
 
-        Author author = new Author(name, surname, email, age, gender);
-        if (authorStorage.getByEmail(author.getEmail()) != null) {
-            System.out.println("invalid email. Author with this email already exists");
+            if (authorStorage.getByEmail(author.getEmail()) != null) {
+                System.err.println("Invalid email. Author with this email already exists");
+            } else {
+                authorStorage.add(author);
+                System.out.println("Thank you, author was added");
+            }
         } else {
-            authorStorage.add(author);
-            System.out.println("Thank you,author was added");
+//            authorStorage.add(author);
+            System.out.println("Thank you, author was added");
+            System.err.println("invalid data");
         }
+
+
     }
 }
+
 
 
 
