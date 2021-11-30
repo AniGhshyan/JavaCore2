@@ -8,16 +8,16 @@ public class Student {
     private int age;
     private String email;
     private String phone;
-    private Lesson [] lesson;
+    private Lesson[] lessons;
 
 
-    public Student(String name, String surname, int age, String email, String phone, Lesson[] lesson) {
+    public Student(String name, String surname, int age, String email, String phone, Lesson[] lessons) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.phone = phone;
-        this.lesson = lesson;
+        this.lessons = lessons;
     }
 
     public Student() {
@@ -65,11 +65,11 @@ public class Student {
     }
 
     public Lesson[] getLesson() {
-        return lesson;
+        return lessons;
     }
 
     public void setLesson(Lesson[] lesson) {
-        this.lesson = lesson;
+        this.lessons = lessons;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Student {
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (phone != null ? !phone.equals(student.phone) : student.phone != null) return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(lesson, student.lesson);
+        return Arrays.equals(lessons, student.lessons);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Student {
         result = 31 * result + age;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(lesson);
+        result = 31 * result + Arrays.hashCode(lessons);
         return result;
     }
 
@@ -107,7 +107,7 @@ public class Student {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", lesson=" + Arrays.toString(lesson) +
+                ", lesson=" + Arrays.toString(lessons) +
                 '}';
     }
 }

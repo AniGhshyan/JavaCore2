@@ -34,9 +34,10 @@ public class LessonStorage {
 
     public void deleteByName(String name) {
         for (int i = 0; i < size; i++) {
-            if (lessons[i].getName().equals(name)) ;
-            for (int j = i + 1; j < size; j++) {
-                lessons[j - 1] = lessons[j];
+            if (lessons[i].getName().equals(name)) {
+                for (int j = i + 1; j < size; j++) {
+                    lessons[j - 1] = lessons[j];
+                }
             }
             size--;
         }

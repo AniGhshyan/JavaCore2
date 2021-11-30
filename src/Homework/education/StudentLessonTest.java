@@ -109,35 +109,20 @@ public class StudentLessonTest {
             System.out.println("please input student's phone");
             String phone = scanner.nextLine();
             lessonStorage.print();
-            System.out.println("Please choose lesson's name");
-            String ln = scanner.nextLine();
-            Lesson lesson1 = lessonStorage.getByLessonName(ln);
-
-            if (lesson1 != null) {
-                System.out.println("Please choose lesson's name");
-                String ln1 = scanner.nextLine();
-                Lesson lesson2 = lessonStorage.getByLessonName(ln1);
-                if (lesson2 != null) {
-                    System.out.println("Please choose lesson's name");
-                    String ln2 = scanner.nextLine();
-                    Lesson lesson3 = lessonStorage.getByLessonName(ln2);
-                    if (lesson3 != null) {
-                        Lesson[] lessons = {lesson1, lesson2, lesson3};
-                        Student student1 = new Student(name, surname, age, email, phone, lessons);
-                        studentStorage.add(student1);
-                    } else {
-                        Lesson[] lessons = {lesson1, lesson2};
-                        Student student1 = new Student(name, surname, age, email, phone, lessons);
-                        studentStorage.add(student1);
-                    }
+            System.out.println("Please choose lesson's name! name1,name2,name3,....");
+            String lessonNameStr = scanner.nextLine();
+            String[] lessonName = lessonNameStr.split(",");
+            Lesson[] lessons = new Lesson[lessonName.length];
+            for (int i = 0; i < lessonName.length; i++) {
+                Lesson lesson = lessonStorage.getByLessonName(lessonName[i]);
+                if (lesson != null) {
+                    lessons[i] = lesson;
                 } else {
-                    Lesson[] lessons = {lesson1};
-                    Student student1 = new Student(name, surname, age, email, phone, lessons);
-                    studentStorage.add(student1);
+                    System.out.println("invalid lesson");
                 }
-            } else {
-                System.err.println("Invalid lesson's name! Please try again");
             }
+            Student student1 = new Student(name, surname, age, email, phone, lessons);
+            studentStorage.add(student1);
         } else {
             System.err.println("Invalid email! Please try again");
             addStudent();
