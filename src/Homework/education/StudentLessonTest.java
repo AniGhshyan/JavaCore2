@@ -77,54 +77,64 @@ public class StudentLessonTest {
     private static void deleteLessonByName() {
         System.out.println("Please choose lesson's name");
         String name = scanner.nextLine();
-        Lesson lesson = lessonStorage.getByLessonName(name);
-        if (lesson != null) {
-            lessonStorage.deleteByName(lesson);
+        if (lessonStorage.getByLessonName(name) != null) {
+            lessonStorage.deleteByName(name);
         } else {
             System.out.println("Lesson does not exists");
         }
     }
 
     private static void printStudentByLesson() {
-        System.out.println("Please choose lesson");
-        String lesson = scanner.nextLine();
-        Lesson lesson1 = lessonStorage.lesson(lesson);
-        if (lesson1 != null) {
-            studentStorage.printStudentByLesson(lesson1);
+        System.out.println("Please choose lesson name");
+        String lessonName = scanner.nextLine();
+        Lesson lesson = lessonStorage.getByLessonName(lessonName);
+        if (lesson != null) {
+            studentStorage.printStudentByLesson(lesson);
         } else {
             System.err.println("Invalid lesson");
         }
     }
 
     private static void addStudent() {
-        System.out.println("please input lesson's name");
-        String lessonName = scanner.nextLine();
-        Lesson lesson = lessonStorage.getByLessonName(lessonName);
-        if (lesson != null) {
-            System.out.println("please input email");
-            String email = scanner.nextLine();
-            Student student = studentStorage.getByEmail(email);
-            if (student == null) {
-                System.out.println("please input student's name");
-                String name = scanner.nextLine();
-                System.out.println("please input student's surname");
-                String surname = scanner.nextLine();
-                System.out.println("please input student's age");
-                int age = Integer.parseInt(scanner.nextLine());
-                System.out.println("please input student's phone");
-                String phone = scanner.nextLine();
-                studentStorage.add(new Student(name, surname, age, email, phone, lesson));
+        System.out.println("please input email");
+        String email = scanner.nextLine();
+        Student student = studentStorage.getByEmail(email);
+        if (student == null) {
+            lessonStorage.print();
+            System.out.println("please input student's name");
+            String name = scanner.nextLine();
+            System.out.println("please input student's surname");
+            String surname = scanner.nextLine();
+            System.out.println("please input student's age");
+            int age = Integer.parseInt(scanner.nextLine());
+            System.out.println("please input student's phone");
+            String phone = scanner.nextLine();
+
+
+            System.out.println("please choose lesson's name! name1,name2,name3");
+            String lessonNameStr = scanner.nextLine();
+            String[] lessonName = lessonNameStr.split(",");
+            if (lessonName.length == 3) {
+                Lesson lesson1 = lessonStorage.getByLessonName(lessonName[0]);
+                lessonStorage.addLesson(lesson1);
+
+                Lesson lesson2 = lessonStorage.getByLessonName(lessonName[1]);
+                lessonStorage.addLesson(lesson2);
+
+                Lesson lesson3 = lessonStorage.getByLessonName(lessonName[2]);
+                lessonStorage.addLesson(lesson3);
+
+                Lesson[] lessons = {lesson1, lesson2, lesson3};
+                studentStorage.add(new Student(name, surname, age, email, phone, lessons));
                 System.out.println("Thank you, student was added");
             } else {
-                System.err.println("student with email: " + email + " is exists");
-                addStudent();
+
+                System.out.println("invalid lesson's name");
             }
         } else {
-            System.err.println("Invalid name! Please try again");
+            System.err.println("Invalid email! Please try again");
             addStudent();
-
         }
-
 
     }
 

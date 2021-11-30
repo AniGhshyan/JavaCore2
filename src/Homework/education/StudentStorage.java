@@ -2,6 +2,7 @@ package Homework.education;
 
 public class StudentStorage {
     private Student[] students = new Student[10];
+    private Lesson[] lessons = new Lesson[1];
     private int size = 0;
 
     public void add(Student student) {
@@ -32,9 +33,9 @@ public class StudentStorage {
         return null;
     }
 
-    public void printStudentByLesson(Lesson lesson1) {
+    public void printStudentByLesson(Lesson lesson) {
         for (int i = 0; i < size; i++) {
-            if (students[i].getLesson().equals(lesson1)) {
+            if (students[i].getLesson().equals(lesson)) {
                 System.out.println(students[i]);
             }
         }
@@ -50,4 +51,18 @@ public class StudentStorage {
             }
         }
     }
+
+    public void addLesoon(Lesson lesson) {
+        if (lessons.length == size) {
+            extend1();
+        }
+        lessons[size++] = lesson;
+    }
+
+    private void extend1() {
+        Lesson[] tmp = new Lesson[lessons.length + 1];
+        System.arraycopy(lessons, 0, tmp, 0, size);
+        tmp = lessons;
+    }
 }
+
