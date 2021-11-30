@@ -2,7 +2,7 @@ package Homework.education;
 
 public class StudentStorage {
     private Student[] students = new Student[10];
-    private Lesson[] lessons = new Lesson[1];
+    private Lesson[] lessons = new Lesson[3];
     private int size = 0;
 
     public void add(Student student) {
@@ -52,17 +52,5 @@ public class StudentStorage {
         }
     }
 
-    public void addLesoon(Lesson lesson) {
-        if (lessons.length == size) {
-            extend1();
-        }
-        lessons[size++] = lesson;
-    }
-
-    private void extend1() {
-        Lesson[] tmp = new Lesson[lessons.length + 1];
-        System.arraycopy(lessons, 0, tmp, 0, size);
-        tmp = lessons;
-    }
 }
 

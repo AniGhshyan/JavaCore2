@@ -100,7 +100,6 @@ public class StudentLessonTest {
         String email = scanner.nextLine();
         Student student = studentStorage.getByEmail(email);
         if (student == null) {
-            lessonStorage.print();
             System.out.println("please input student's name");
             String name = scanner.nextLine();
             System.out.println("please input student's surname");
@@ -109,27 +108,35 @@ public class StudentLessonTest {
             int age = Integer.parseInt(scanner.nextLine());
             System.out.println("please input student's phone");
             String phone = scanner.nextLine();
+            lessonStorage.print();
+            System.out.println("Please choose lesson's name");
+            String ln = scanner.nextLine();
+            Lesson lesson1 = lessonStorage.getByLessonName(ln);
 
-
-            System.out.println("please choose lesson's name! name1,name2,name3");
-            String lessonNameStr = scanner.nextLine();
-            String[] lessonName = lessonNameStr.split(",");
-            if (lessonName.length == 3) {
-                Lesson lesson1 = lessonStorage.getByLessonName(lessonName[0]);
-                lessonStorage.addLesson(lesson1);
-
-                Lesson lesson2 = lessonStorage.getByLessonName(lessonName[1]);
-                lessonStorage.addLesson(lesson2);
-
-                Lesson lesson3 = lessonStorage.getByLessonName(lessonName[2]);
-                lessonStorage.addLesson(lesson3);
-
-                Lesson[] lessons = {lesson1, lesson2, lesson3};
-                studentStorage.add(new Student(name, surname, age, email, phone, lessons));
-                System.out.println("Thank you, student was added");
+            if (lesson1 != null) {
+                System.out.println("Please choose lesson's name");
+                String ln1 = scanner.nextLine();
+                Lesson lesson2 = lessonStorage.getByLessonName(ln1);
+                if (lesson2 != null) {
+                    System.out.println("Please choose lesson's name");
+                    String ln2 = scanner.nextLine();
+                    Lesson lesson3 = lessonStorage.getByLessonName(ln2);
+                    if (lesson3 != null) {
+                        Lesson[] lessons = {lesson1, lesson2, lesson3};
+                        Student student1 = new Student(name, surname, age, email, phone, lessons);
+                        studentStorage.add(student1);
+                    } else {
+                        Lesson[] lessons = {lesson1, lesson2};
+                        Student student1 = new Student(name, surname, age, email, phone, lessons);
+                        studentStorage.add(student1);
+                    }
+                } else {
+                    Lesson[] lessons = {lesson1};
+                    Student student1 = new Student(name, surname, age, email, phone, lessons);
+                    studentStorage.add(student1);
+                }
             } else {
-
-                System.out.println("invalid lesson's name");
+                System.err.println("Invalid lesson's name! Please try again");
             }
         } else {
             System.err.println("Invalid email! Please try again");
