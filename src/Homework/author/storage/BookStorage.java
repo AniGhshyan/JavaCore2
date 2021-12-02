@@ -1,4 +1,8 @@
-package Homework.author;
+package Homework.author.storage;
+
+import Homework.author.model.Author;
+import Homework.author.model.Book;
+import Homework.author.util.ArrayUtil;
 
 public class BookStorage {
     private Book[] books = new Book[16];

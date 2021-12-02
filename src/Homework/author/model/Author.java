@@ -1,6 +1,8 @@
-package Homework.author;
+package Homework.author.model;
 
-import java.util.Objects;
+import Homework.author.util.DateUtil;
+
+import java.util.Date;
 
 public class Author {
     private String name;
@@ -8,13 +10,15 @@ public class Author {
     private String email;
     private int age;
     private String gender;
+    private Date dateOfBirth;
 
-    public Author(String name, String surname, String email, int age, String gender) {
+    public Author(String name, String surname, String email, int age, String gender, Date dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.age = age;
         this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Author() {
@@ -36,9 +40,13 @@ public class Author {
         this.surname = surname;
     }
 
-    public String getEmail() {return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getAge() {
         return age;
@@ -48,12 +56,20 @@ public class Author {
         this.age = age;
     }
 
-    public String getGendre() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGendre(String gendre) {
-        this.gender = gendre;
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -67,7 +83,8 @@ public class Author {
         if (name != null ? !name.equals(author.name) : author.name != null) return false;
         if (surname != null ? !surname.equals(author.surname) : author.surname != null) return false;
         if (email != null ? !email.equals(author.email) : author.email != null) return false;
-        return gender != null ? gender.equals(author.gender) : author.gender == null;
+        if (gender != null ? !gender.equals(author.gender) : author.gender != null) return false;
+        return dateOfBirth != null ? dateOfBirth.equals(author.dateOfBirth) : author.dateOfBirth == null;
     }
 
     @Override
@@ -77,6 +94,7 @@ public class Author {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + age;
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         return result;
     }
 
@@ -87,7 +105,8 @@ public class Author {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
-                ", gendre='" + gender + '\'' +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth=" + DateUtil.dateToString(dateOfBirth) +
                 '}';
     }
 }

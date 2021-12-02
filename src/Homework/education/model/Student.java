@@ -1,6 +1,9 @@
-package Homework.education;
+package Homework.education.model;
+
+import Homework.education.util.DateUtil;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class Student {
     private String name;
@@ -9,15 +12,16 @@ public class Student {
     private String email;
     private String phone;
     private Lesson[] lessons;
+    private Date registeredDate;
 
-
-    public Student(String name, String surname, int age, String email, String phone, Lesson[] lessons) {
+    public Student(String name, String surname, int age, String email, String phone, Lesson[] lessons, Date date) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.phone = phone;
         this.lessons = lessons;
+        this.registeredDate = date;
     }
 
     public Student() {
@@ -72,6 +76,14 @@ public class Student {
         this.lessons = lessons;
     }
 
+    public Date getDate() {
+        return registeredDate;
+    }
+
+    public void setDate(Date date) {
+        this.registeredDate = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,7 +97,8 @@ public class Student {
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (phone != null ? !phone.equals(student.phone) : student.phone != null) return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
-        return Arrays.equals(lessons, student.lessons);
+        if (!Arrays.equals(lessons, student.lessons)) return false;
+        return registeredDate != null ? registeredDate.equals(student.registeredDate) : student.registeredDate == null;
     }
 
     @Override
@@ -96,6 +109,7 @@ public class Student {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(lessons);
+        result = 31 * result + (registeredDate != null ? registeredDate.hashCode() : 0);
         return result;
     }
 
@@ -107,7 +121,7 @@ public class Student {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", lesson=" + Arrays.toString(lessons) +
-                '}';
+                ", lessons=" + Arrays.toString(lessons) +
+                ", date=" + DateUtil.dateToString(registeredDate) + '}';
     }
 }

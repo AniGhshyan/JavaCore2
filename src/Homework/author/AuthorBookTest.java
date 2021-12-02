@@ -1,36 +1,29 @@
 package Homework.author;
 
+import Homework.author.AuthorBookCommands;
+import Homework.author.model.Author;
+import Homework.author.model.Book;
+import Homework.author.storage.AuthorStorage;
+import Homework.author.storage.BookStorage;
+import Homework.author.util.DateUtil;
+
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Scanner;
 
-public class AuthorBookTest {
+public class AuthorBookTest implements AuthorBookCommands {
     static Scanner scanner = new Scanner(System.in);
     static AuthorStorage authorStorage = new AuthorStorage();
     static BookStorage bookStorage = new BookStorage();
 
-    private static final String EXIT = "0";
-    private static final String ADD_AUTHORS = "1";
-    private static final String ADD_BOOK = "2";
-    private static final String SEARCH_AUTHORS = "3";
-    private static final String SEARCH_AUTHORS_BY_AGE = "4";
-    private static final String SEARCH_BOOKS_BY_TITLE = "5";
-    private static final String PRINT_AUTHORS = "6";
-    private static final String PRINT_BOOKS = "7";
-    private static final String SEARCH_BOOKS_BY_AUTHOR = "8";
-    private static final String COUNT_BOOKS_BY_AUTHOR = "9";
-    private static final String CHANGE_AUTHOR = "10";
-    private static final String CHANGE_BOOK_AUTHOR = "11";
-    private static final String DELETE_BY_AUTHOR = "12";
-    private static final String DELETE_AUTHOR = "13";
-    private static final String DELETE_BOOK = "14";
 
-
-    public static void main(String[] args) {
-        authorStorage.add(new Author("poxos", "poxosyan", "poxos@mail.ru", 22, "male"));
-        authorStorage.add(new Author("poxosuhi", "poxosyan", "poxosuhi@mail.ru", 23, "female"));
-        authorStorage.add(new Author("petros", "petrosyan", "petros@mail.ru", 25, "male"));
+    public static void main(String[] args) throws ParseException {
+        authorStorage.add(new Author("poxos", "poxosyan", "poxos@mail.ru", 22, "male", DateUtil.stringToDate("12/05/1988")));
+        authorStorage.add(new Author("poxosuhi", "poxosyan", "poxosuhi@mail.ru", 23, "female", DateUtil.stringToDate("03/04/1995")));
+        authorStorage.add(new Author("petros", "petrosyan", "petros@mail.ru", 25, "male", DateUtil.stringToDate("16/11/2000")));
         boolean isRun = true;
         while (isRun) {
-            pritCommands();
+            AuthorBookCommands.pritCommands();
             String command = scanner.nextLine();
             switch (command) {
                 case EXIT:
@@ -167,7 +160,7 @@ public class AuthorBookTest {
             author.setAge(age);
             System.out.println("please input author's gender: ");
             String gender = scanner.nextLine();
-            author.setGendre(gender);
+            author.setGender(gender);
         } else {
             System.err.println("Author does not exists");
         }
@@ -229,10 +222,7 @@ public class AuthorBookTest {
             System.out.println("invalid email! please try again");
             addBook();
         }
-
-
     }
-
 
     private static void searchByAge() {
         System.out.println("please input min age");
@@ -242,37 +232,20 @@ public class AuthorBookTest {
         authorStorage.searchByAge(minAge, maxAge);
     }
 
-    private static void pritCommands() {
-        System.out.println("\u001B[34m" + "please input " + EXIT + " for EXIT");
-        System.out.println("please input " + ADD_AUTHORS + " for author");
-        System.out.println("please input " + ADD_BOOK + " for book");
-        System.out.println("please input " + SEARCH_AUTHORS + " for search author by name");
-        System.out.println("please input " + SEARCH_AUTHORS_BY_AGE + " for search author by age");
-        System.out.println("please input " + SEARCH_BOOKS_BY_TITLE + " for search book by title");
-        System.out.println("please input " + PRINT_AUTHORS + " for print authors");
-        System.out.println("please input " + PRINT_BOOKS + " for print books");
-        System.out.println("please input " + SEARCH_BOOKS_BY_AUTHOR + " for search book by authors");
-        System.out.println("please input " + COUNT_BOOKS_BY_AUTHOR + " for count book by authors");
-        System.out.println("please input " + CHANGE_AUTHOR + " for change author's information");
-        System.out.println("please input " + CHANGE_BOOK_AUTHOR + " for change author");
-        System.out.println("please input " + DELETE_BY_AUTHOR + " for delete book by author");
-        System.out.println("please input " + DELETE_AUTHOR + " for delete author");
-        System.out.println("please input " + DELETE_BOOK + " for delete book" + "\u001B[0m");
-    }
-
     private static void searchByName() {
         System.out.println("Please input keyword");
         String keyword = scanner.nextLine();
         authorStorage.searchByName(keyword);
     }
 
-    private static void addAuthor() {
-        System.out.println("please input autor's name,surname,email,gender,age");
+    private static void addAuthor() throws ParseException {
+        System.out.println("please input autor's name,surname,email,gender,age,dateOfBrith[12/12/2021]");
         String authorDataStr = scanner.nextLine();
         String[] authorData = authorDataStr.split(",");
-        if (authorData.length == 5) {
+        if (authorData.length == 6) {
             int age = Integer.parseInt(authorData[4]);
-            Author author = new Author(authorData[0], authorData[1], authorData[2], age, authorData[3]);
+            Date date = DateUtil.stringToDate(authorData[5]);
+            Author author = new Author(authorData[0], authorData[1], authorData[2], age, authorData[3], date);
 
             if (authorStorage.getByEmail(author.getEmail()) != null) {
                 System.err.println("Invalid email. Author with this email already exists");
