@@ -68,11 +68,11 @@ public class Student {
         this.phone = phone;
     }
 
-    public Lesson[] getLesson() {
+    public Lesson[] getLessons() {
         return lessons;
     }
 
-    public void setLesson(Lesson[] lesson) {
+    public void setLessons(Lesson[] lesson) {
         this.lessons = lessons;
     }
 

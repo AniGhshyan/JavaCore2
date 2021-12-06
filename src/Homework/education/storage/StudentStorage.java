@@ -5,7 +5,7 @@ import Homework.education.model.Student;
 
 public class StudentStorage {
     private Student[] students = new Student[10];
-    private Lesson[] lessons = new Lesson[3];
+    private Lesson[] lessons = new Lesson[10];
     private int size = 0;
 
     public void add(Student student) {
@@ -38,8 +38,10 @@ public class StudentStorage {
 
     public void printStudentByLesson(Lesson lesson) {
         for (int i = 0; i < size; i++) {
-            if (students[i].getLesson().equals(lesson)) {
-                System.out.println(students[i]);
+            for (Lesson lesson1 : students[i].getLessons()) {
+                if (lesson1.equals(lesson)) {
+                    System.out.println(students[i]);
+                }
             }
         }
     }

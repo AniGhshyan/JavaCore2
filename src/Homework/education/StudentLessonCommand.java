@@ -11,15 +11,19 @@ public interface StudentLessonCommand {
    String DELETE_LESSON_BY_NAME = "6";
    String DELETE_STUDENT_BY_EMAIL = "7";
 
-     static void printCommands() {
+     static void printCommands1() {
         System.out.println("\u001B[34m" + "please input " + EXIT + " for Exit");
         System.out.println("please input " + ADD_LESSON + " for lessons");
         System.out.println("please input " + ADD_STUDENT + " for student");
         System.out.println("please input " + PRINT_STUDENTS + " for print student");
         System.out.println("please input " + PRINT_STUDENTS_BY_LESSON + " for print student by lesson");
-        System.out.println("please input " + PRINT_LESSONS + " for print lesson");
-        System.out.println("please input " + DELETE_LESSON_BY_NAME + " for delete lesson by name");
-        System.out.println("please input " + DELETE_STUDENT_BY_EMAIL + " for delete student by email" + "\u001B[0m");
+        System.out.println("please input " + PRINT_LESSONS + " for print lesson" + "\u001B[0m");
+
     }
+    static void printCommands2(){
+       System.out.println("\u001B[34m" +"please input " + DELETE_LESSON_BY_NAME + " for delete lesson by name");
+       System.out.println("please input " + DELETE_STUDENT_BY_EMAIL + " for delete student by email" + "\u001B[0m");
+    }
+
 
 }
