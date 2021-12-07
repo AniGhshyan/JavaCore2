@@ -34,11 +34,12 @@ public class StudentLessonTest implements StudentLessonCommand {
                     break;
                 case UserCommands.LOGIN:
                     login();
-//                    while (isRun) {
+                    boolean isRun1 = true;
+                    while (isRun1) {
                         String command1 = scanner.nextLine();
                         switch (command1) {
                             case EXIT:
-                                isRun = false;
+                                isRun1 = false;
                                 break;
                             case ADD_LESSON:
                                 addLesson();
@@ -65,7 +66,7 @@ public class StudentLessonTest implements StudentLessonCommand {
                                 System.err.println("Invalid command");
                                 break;
                         }
-//                    }
+                    }
                     break;
                 case UserCommands.REGISTER:
                     uresRegister();
