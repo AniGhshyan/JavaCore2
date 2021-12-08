@@ -42,7 +42,6 @@ public class StudentLessonTest implements StudentLessonCommand {
                     System.err.println("invalid commands");
             }
         }
-
     }
 
     private static void uresRegister() {
@@ -73,9 +72,9 @@ public class StudentLessonTest implements StudentLessonCommand {
         String password = scanner.nextLine();
         User user = userStorage.getByEmailPassword(email, password);
         if (user != null) {
-            System.out.println("Please input user's type");
-            String type = scanner.nextLine();
-            if (type.equals("user")) {
+//            System.out.println("Please input user's type");
+//            String type = scanner.nextLine();
+            if (user.getType().equals("user")) {
                 boolean isRun2 = true;
                 while (isRun2) {
                     StudentLessonCommand.printCommands1();
@@ -104,7 +103,7 @@ public class StudentLessonTest implements StudentLessonCommand {
                             break;
                     }
                 }
-            } else if (type.equals("admin")) {
+            } else if (user.getType().equals("admin")) {
                 boolean isRun1 = true;
                 while (isRun1) {
                     StudentLessonCommand.printCommands1();
