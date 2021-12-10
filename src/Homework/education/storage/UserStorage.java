@@ -20,16 +20,23 @@ public class UserStorage {
     }
 
     public void print() {
-        for (int i = 0; i < users.length; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.println(users[i]);
         }
     }
 
-    public User getByEmailPassword(String email, String password) {
+    public User getByPassword(String password) {
+        for (int i = 0; i < size; i++) {
+            if (users[i].getPassword().equals(password))
+                return users[i];
+        }
+        return null;
+    }
+
+    public User getByEmail(String email) {
         for (int i = 0; i < size; i++) {
             if (users[i].getEmail().equals(email)) {
-                if (users[i].getPassword().equals(password))
-                    return users[i];
+                return users[i];
             }
         }
         return null;

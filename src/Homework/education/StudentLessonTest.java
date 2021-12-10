@@ -38,6 +38,9 @@ public class StudentLessonTest implements StudentLessonCommand {
                 case UserCommands.REGISTER:
                     uresRegister();
                     break;
+                case UserCommands.PRINT_USER:
+                    userStorage.print();
+                    break;
                 default:
                     System.err.println("invalid commands");
             }
@@ -47,18 +50,21 @@ public class StudentLessonTest implements StudentLessonCommand {
     private static void uresRegister() {
         System.out.println("Please input user's email");
         String email = scanner.nextLine();
-        System.out.println("Please input user's password");
-        String password = scanner.nextLine();
-        User user = userStorage.getByEmailPassword(email, password);
+        User user = userStorage.getByEmail(email);
         if (user == null) {
-            System.out.println("Please input user's name");
-            String name = scanner.nextLine();
-            System.out.println("Please input user's surname");
-            String surname = scanner.nextLine();
-            System.out.println("Please input user's type(uzer or admin)");
-            String type = scanner.nextLine();
-            User user1 = new User(name, surname, email, password, type);
-            userStorage.addUser(user1);
+            System.out.println("Please input user's password");
+            String password = scanner.nextLine();
+            if (user.getPassword().equals(password)) {
+                System.out.println("Please input user's name");
+                String name = scanner.nextLine();
+                System.out.println("Please input user's surname");
+                String surname = scanner.nextLine();
+                System.out.println("Please input user's type(uzer or admin)");
+                String type = scanner.nextLine();
+                User user1 = new User(name, surname, email, password, type);
+                userStorage.addUser(user1);
+                System.out.println("Thank you user was added");
+            }
         } else {
             System.out.println("invalid user,try again");
             uresRegister();
@@ -68,82 +74,94 @@ public class StudentLessonTest implements StudentLessonCommand {
     private static void login() throws ParseException {
         System.out.println("Please choose user's email");
         String email = scanner.nextLine();
-        System.out.println("Please choose user's password");
-        String password = scanner.nextLine();
-        User user = userStorage.getByEmailPassword(email, password);
-        if (user != null) {
-//            System.out.println("Please input user's type");
-//            String type = scanner.nextLine();
-            if (user.getType().equals("user")) {
-                boolean isRun2 = true;
-                while (isRun2) {
-                    StudentLessonCommand.printCommands1();
-                    String command2 = scanner.nextLine();
-                    switch (command2) {
-                        case EXIT:
-                            isRun2 = false;
-                            break;
-                        case ADD_LESSON:
-                            addLesson();
-                            break;
-                        case ADD_STUDENT:
-                            addStudent();
-                            break;
-                        case PRINT_STUDENTS:
-                            studentStorage.print();
-                            break;
-                        case PRINT_STUDENTS_BY_LESSON:
-                            printStudentByLesson();
-                            break;
-                        case PRINT_LESSONS:
-                            lessonStorage.print();
-                            break;
-                        default:
-                            System.err.println("Invalid command");
-                            break;
-                    }
-                }
-            } else if (user.getType().equals("admin")) {
-                boolean isRun1 = true;
-                while (isRun1) {
-                    StudentLessonCommand.printCommands1();
-                    StudentLessonCommand.printCommands2();
-                    String command1 = scanner.nextLine();
-                    switch (command1) {
-                        case EXIT:
-                            isRun1 = false;
-                            break;
-                        case ADD_LESSON:
-                            addLesson();
-                            break;
-                        case ADD_STUDENT:
-                            addStudent();
-                            break;
-                        case PRINT_STUDENTS:
-                            studentStorage.print();
-                            break;
-                        case PRINT_STUDENTS_BY_LESSON:
-                            printStudentByLesson();
-                            break;
-                        case PRINT_LESSONS:
-                            lessonStorage.print();
-                            break;
-                        case DELETE_LESSON_BY_NAME:
-                            deleteLessonByName();
-                            break;
-                        case DELETE_STUDENT_BY_EMAIL:
-                            deleteStudentByEmail();
-                            break;
-                        default:
-                            System.err.println("Invalid command");
-                            break;
-                    }
-                }
-            }
+        User user = userStorage.getByEmail(email);
+        if (user == null) {
+            System.out.println("Invalid email");
         } else {
-            System.err.println("Invalid email and password");
-            login();
+            System.out.println("Please choose user's password");
+            String password = scanner.nextLine();
+            if (user.getPassword().equals(password)) {
+                if (user.getType().equals("user")) {
+                    userCommands();
+                } else if (user.getType().equals("admin")) {
+                    adminCommands();
+                }
+            } else {
+                System.out.println(email);
+                System.err.println("Invalid password");
+                System.out.println("\033[0;31m"+"Please try again"+  "\u001B[0m");
+                login();
+            }
         }
+    }
+
+    private static void adminCommands() throws ParseException {
+        boolean isRun1 = true;
+        while (isRun1) {
+            StudentLessonCommand.printAdminCommands();
+            String command1 = scanner.nextLine();
+            switch (command1) {
+                case EXIT:
+                    isRun1 = false;
+                    break;
+                case ADD_LESSON:
+                    addLesson();
+                    break;
+                case ADD_STUDENT:
+                    addStudent();
+                    break;
+                case PRINT_STUDENTS:
+                    studentStorage.print();
+                    break;
+                case PRINT_STUDENTS_BY_LESSON:
+                    printStudentByLesson();
+                    break;
+                case PRINT_LESSONS:
+                    lessonStorage.print();
+                    break;
+                case DELETE_LESSON_BY_NAME:
+                    deleteLessonByName();
+                    break;
+                case DELETE_STUDENT_BY_EMAIL:
+                    deleteStudentByEmail();
+                    break;
+                default:
+                    System.err.println("Invalid command");
+                    break;
+            }
+        }
+    }
+
+    private static void userCommands() throws ParseException {
+        boolean isRun2 = true;
+        while (isRun2) {
+            StudentLessonCommand.printUsedrCommands();
+            String command2 = scanner.nextLine();
+            switch (command2) {
+                case EXIT:
+                    isRun2 = false;
+                    break;
+                case ADD_LESSON:
+                    addLesson();
+                    break;
+                case ADD_STUDENT:
+                    addStudent();
+                    break;
+                case PRINT_STUDENTS:
+                    studentStorage.print();
+                    break;
+                case PRINT_STUDENTS_BY_LESSON:
+                    printStudentByLesson();
+                    break;
+                case PRINT_LESSONS:
+                    lessonStorage.print();
+                    break;
+                default:
+                    System.err.println("Invalid command");
+                    break;
+            }
+        }
+
     }
 
     private static void deleteStudentByEmail() {
