@@ -87,10 +87,21 @@ public class StudentLessonTest implements StudentLessonCommand {
                     adminCommands();
                 }
             } else {
-                System.out.println(email);
-                System.err.println("Invalid password");
-                System.out.println("\033[0;31m"+"Please try again"+  "\u001B[0m");
-                login();
+                System.out.println("Your email is " + email);
+                System.out.println("\033[0;31m" + "\n" + "Forget password" + "\u001B[0m");
+                System.out.println("Please choose user's name");
+                String name = scanner.nextLine();
+                if (!user.getName().equals(name)) {
+                    System.out.println("Invalid user: Try again");
+                    login();
+                }
+                System.out.println("Please choose user's surname");
+                String surname = scanner.nextLine();
+                if (user.getSurname().equals(surname)) {
+                    System.out.println("Please input new password");
+                    String password1 = scanner.nextLine();
+                    user.setPassword(password1);
+                }
             }
         }
     }
