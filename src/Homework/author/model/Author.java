@@ -1,7 +1,5 @@
 package Homework.author.model;
 
-import Homework.author.util.DateUtil;
-
 import java.util.Date;
 
 public class Author {
@@ -20,8 +18,7 @@ public class Author {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
     }
-
-    public Author() {
+    Author(){
     }
 
     public String getName() {
@@ -106,7 +103,7 @@ public class Author {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
-                ", dateOfBirth=" + DateUtil.dateToString(dateOfBirth) +
+                ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
 }

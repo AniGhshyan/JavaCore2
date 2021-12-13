@@ -1,5 +1,6 @@
 package Homework.author.storage;
 
+import Homework.author.exception.BookNotFoundException;
 import Homework.author.model.Author;
 import Homework.author.model.Book;
 import Homework.author.util.ArrayUtil;
@@ -27,13 +28,13 @@ public class BookStorage {
         }
     }
 
-    public Book getBySerialId(String serialId) {
+    public Book getBySerialId(String serialId) throws BookNotFoundException {
         for (int i = 0; i < size; i++) {
             if (books[i].getSerialId().equals(serialId)) {
                 return books[i];
             }
         }
-        return null;
+        throw new BookNotFoundException("Book does not exists.serialId: " + serialId);
     }
 
     public void searchBooksByTitle(String keyword) {
@@ -44,7 +45,7 @@ public class BookStorage {
         }
     }
 
-    public void serachByAuthor(Author author) {
+    public void searchByAuthor(Author author) {
         for (int i = 0; i < size; i++) {
             for (Author author1 : books[i].getAuthors()) {
                 if (author1.equals(author)) {
@@ -66,16 +67,6 @@ public class BookStorage {
         System.out.println("Count of " + author.getEmail() + " author's book is " + count);
     }
 
-
-    public Book getByTitle(String title) {
-        for (int i = 0; i < size; i++) {
-            if (books[i].getTitle().equals(title)) {
-                return books[i];
-            }
-        }
-        return null;
-    }
-
     public void deleteByAuthor(Author author) {
         for (int i = 0; i < size; i++) {
             for (Author author1 : books[i].getAuthors()) {
@@ -93,15 +84,5 @@ public class BookStorage {
                 break;
             }
         }
-    }
-
-
-    public Book getBySerailId(String serialId) {
-        for (int i = 0; i < size; i++) {
-            if (books[i].getSerialId().equals(serialId)) {
-                return books[i];
-            }
-        }
-        return null;
     }
 }

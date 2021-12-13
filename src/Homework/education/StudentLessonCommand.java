@@ -23,7 +23,7 @@ public interface StudentLessonCommand {
 
     }
 
-    static void printUsedrCommands() {
+    static void printUserCommands() {
         System.out.println("\u001B[34m" + "please input " + EXIT + " for Exit");
         System.out.println("please input " + ADD_LESSON + " for lessons");
         System.out.println("please input " + ADD_STUDENT + " for student");
