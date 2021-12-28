@@ -238,7 +238,6 @@ public class StudentLessonTest implements StudentLessonCommand {
             System.out.println("please input student's date of birth[12/12/2021]");
             String dateStr = scanner.nextLine();
             Date date = DateUtil.stringToDate(dateStr);
-
             lessonStorage.print();
             System.out.println("Please choose lesson's name! name1,name2,name3,....");
             String lessonNameStr = scanner.nextLine();
@@ -272,11 +271,11 @@ public class StudentLessonTest implements StudentLessonCommand {
         String name = scanner.nextLine();
         System.out.println("please input lesson's duration");
         String duration = scanner.nextLine();
-        System.out.println("please input lesson's lecturar name");
-        String lecturarName = scanner.nextLine();
+        System.out.println("please input lesson's lecturer name");
+        String lecturerName = scanner.nextLine();
         System.out.println("please input lesson's price");
         int price = Integer.parseInt(scanner.nextLine());
-        Lesson lesson = new Lesson(name, duration, lecturarName, price);
+        Lesson lesson = new Lesson(name, duration, lecturerName, price);
         lessonStorage.addLesson(lesson);
         System.out.println("Thank you, lesson was added");
 
