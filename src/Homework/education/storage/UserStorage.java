@@ -3,33 +3,26 @@ package Homework.education.storage;
 import Homework.education.exception.UserNotFoundException;
 import Homework.education.model.User;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class UserStorage {
-    private User[] users = new User[10];
-    private int size = 0;
+    private HashMap<String, User> users = new HashMap<>();
 
-    public void addUser(User user) {
-        if (users.length == size) {
-            extend();
-        }
-        users[size++] = user;
-    }
-
-    private void extend() {
-        User[] tmp = new User[users.length + 10];
-        System.arraycopy(users, 0, tmp, 0, users.length);
-        tmp = users;
+    public void addUser(String email, User user) {
+        users.put(email, user);
     }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
+        for (User value : users.values()) {
+            System.out.println(value);
         }
     }
 
     public User getByEmail(String email) throws UserNotFoundException {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)) {
-                return users[i];
+        for (User value : users.values()) {
+            if (value.getEmail().equals(email)) {
+                return value;
             }
         }
         throw new UserNotFoundException("User by " + email + " does not exists");

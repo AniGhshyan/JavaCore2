@@ -2,48 +2,38 @@ package Homework.education.storage;
 
 import Homework.education.model.Lesson;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+
 public class LessonStorage {
-    private Lesson[] lessons = new Lesson[10];
-    private int size = 0;
+    private LinkedList<Lesson> lessons = new LinkedList<>();
 
     public void addLesson(Lesson lesson) {
-        if (lessons.length == size) {
-            extend();
-        }
-        lessons[size++] = lesson;
-    }
-
-    private void extend() {
-        Lesson[] tmp = new Lesson[lessons.length + 10];
-        System.arraycopy(lessons, 0, tmp, 0, size);
-        lessons = tmp;
+        lessons.add(lesson);
     }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(lessons[i]);
+        for (Lesson lesson : lessons) {
+            System.out.println(lesson);
         }
     }
 
     public Lesson getByLessonName(String lessonName) {
-        for (int i = 0; i < size; i++) {
-            if (lessons[i].getName().equals(lessonName)) {
-                return lessons[i];
+        for (Lesson lesson : lessons) {
+            if (lesson.getName().equals(lessonName)) {
+                return lesson;
             }
         }
         return null;
     }
 
     public void deleteByName(String name) {
-        for (int i = 0; i < size; i++) {
-            if (lessons[i].getName().equals(name)) {
-                for (int j = i + 1; j < size; j++) {
-                    lessons[j - 1] = lessons[j];
-                }
-            }
-            size--;
-        }
 
+        for (Lesson lesson : lessons) {
+            if (lesson.getName().equals(name)) {
+                lessons.remove(lesson);
+            }
+        }
     }
 }
 

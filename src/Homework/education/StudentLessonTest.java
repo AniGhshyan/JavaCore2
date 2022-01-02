@@ -22,8 +22,8 @@ public class StudentLessonTest implements StudentLessonCommand {
     public static void main(String[] args) throws ParseException {
         User user = new User("Poxos", "Poxosyan", "poxos@mail.ru", "poxos", "user");
         User user1 = new User("Poxosuhi", "Poxosyan", "poxosuhi@mail.ru", "poxosuhi", "admin");
-        userStorage.addUser(user);
-        userStorage.addUser(user1);
+        userStorage.addUser("poxos@mail.ru", user);
+        userStorage.addUser("poxosuhi@mail.ru", user1);
 
         boolean isRun = true;
         while (isRun) {
@@ -66,7 +66,7 @@ public class StudentLessonTest implements StudentLessonCommand {
             String type = scanner.nextLine();
             if (type.equalsIgnoreCase("user") || type.equalsIgnoreCase("admin")) {
                 User user1 = new User(name, surname, email, password, type);
-                userStorage.addUser(user1);
+                userStorage.addUser(email, user1);
                 System.out.println("Thank you user was added");
             } else {
                 System.out.println("Invalid type: Please try again");
@@ -184,7 +184,7 @@ public class StudentLessonTest implements StudentLessonCommand {
         String email = scanner.nextLine();
         Student student = studentStorage.getByEmail(email);
         if (student != null) {
-            studentStorage.deletStudent(student);
+            studentStorage.deleteStudent(student);
         } else {
             System.out.println("Student does not exists");
         }
