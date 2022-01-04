@@ -4,10 +4,11 @@ import Homework.education.model.Lesson;
 import Homework.education.model.Student;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class StudentStorage {
     private LinkedList<Student> students = new LinkedList<>();
-    private LinkedList<Lesson> lessons = new LinkedList<>();
+    private List<Lesson> lessons = new LinkedList<>();
 
     public void add(Student student) {
         students.add(student);

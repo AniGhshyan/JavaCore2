@@ -5,9 +5,10 @@ import Homework.education.model.User;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserStorage {
-    private HashMap<String, User> users = new HashMap<>();
+    private Map<String, User> users = new HashMap<>();
 
     public void addUser(String email, User user) {
         users.put(email, user);

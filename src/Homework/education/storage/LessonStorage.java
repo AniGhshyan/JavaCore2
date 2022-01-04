@@ -4,9 +4,10 @@ import Homework.education.model.Lesson;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class LessonStorage {
-    private LinkedList<Lesson> lessons = new LinkedList<>();
+    private List<Lesson> lessons = new LinkedList<>();
 
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);
