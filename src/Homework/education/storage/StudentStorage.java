@@ -2,16 +2,18 @@ package Homework.education.storage;
 
 import Homework.education.model.Lesson;
 import Homework.education.model.Student;
+import Homework.education.util.FileUtil;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
 public class StudentStorage {
-    private LinkedList<Student> students = new LinkedList<>();
-    private List<Lesson> lessons = new LinkedList<>();
+    private List<Student> students = new LinkedList<>();
 
     public void add(Student student) {
         students.add(student);
+        serialize();
     }
 
     public void print() {
@@ -43,13 +45,20 @@ public class StudentStorage {
         for (Object o : students.toArray()) {
             if (o.equals(student)) {
                 students.remove(o);
+                serialize();
             }
         }
-//        for (Student student1 : students) {
-//            if (student1.equals(student)) {
-//                students.remove(student1);
-//            }
-//        }
+    }
+
+    private void serialize() {
+        FileUtil.serializeStudents(students);
+    }
+
+    public void initData() {
+        List<Student> studentList = FileUtil.deSerializeStudents();
+        if (studentList != null) {
+            students = studentList;
+        }
     }
 }
 

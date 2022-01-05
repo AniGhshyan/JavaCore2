@@ -2,6 +2,7 @@ package Homework.education.storage;
 
 import Homework.education.exception.UserNotFoundException;
 import Homework.education.model.User;
+import Homework.education.util.FileUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,7 @@ public class UserStorage {
 
     public void addUser(String email, User user) {
         users.put(email, user);
+        serialize();
     }
 
     public void print() {
@@ -21,11 +23,21 @@ public class UserStorage {
     }
 
     public User getByEmail(String email) throws UserNotFoundException {
-        for (User value : users.values()) {
-            if (value.getEmail().equals(email)) {
-                return value;
-            }
+        if (!users.containsKey(email)) {
+            throw new UserNotFoundException("User by " + email + " does not exists");
+
         }
-        throw new UserNotFoundException("User by " + email + " does not exists");
+        return users.get(email);
+    }
+
+    private void serialize() {
+        FileUtil.serializeUserMap(users);
+    }
+
+    public void initData() {
+        Map<String, User> userMap = FileUtil.deSerializeUserMap();
+        if (userMap != null) {
+            users = userMap;
+        }
     }
 }

@@ -1,13 +1,15 @@
 package Homework.author.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String email;
     private String name;
     private String surname;
     private String password;
-    private String type;
+    private UserType type;
 
-    public User(String email, String name, String surname, String password, String type) {
+    public User(String email, String name, String surname, String password,UserType type) {
         this.email = email;
         this.name = name;
         this.surname = surname;
@@ -42,11 +44,11 @@ public class User {
         this.password = password;
     }
 
-    public String getType() {
+    public UserType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 

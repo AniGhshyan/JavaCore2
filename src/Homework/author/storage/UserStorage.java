@@ -1,37 +1,34 @@
 package Homework.author.storage;
 
 import Homework.author.model.User;
+import Homework.author.util.FileUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserStorage {
-    private User[] users = new User[10];
-    private int size = 0;
+    private Map<String, User> userMap = new HashMap<>();
 
     public void addUser(User user) {
-        if (users.length == size) {
-            extend();
-        }
-        users[size++] = user;
-    }
-
-    private void extend() {
-        User[] tmp = new User[users.length + 10];
-        System.arraycopy(users, 0, tmp, 0, users.length);
-        users = tmp;
+        userMap.put(user.getEmail(), user);
+        FileUtil.serializeUserMap(userMap);
     }
 
     public void print() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(users[i]);
+        for (User value : userMap.values()) {
+            System.out.println(value);
         }
     }
 
     public User getByEmail(String email) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email)) {
-                return users[i];
-            }
+        return userMap.get(email);
+    }
+
+    public void initData() {
+        Map<String, User> userMapFromFile = FileUtil.deserializeUserMap();
+        if (userMapFromFile != null) {
+            userMap = userMapFromFile;
         }
-        return null;
     }
 
 }
