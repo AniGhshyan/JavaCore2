@@ -9,8 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LessonStorage {
-    private
-    List<Lesson> lessons = new ArrayList<>();
+    private List<Lesson> lessons = new ArrayList<>();
 
     public void addLesson(Lesson lesson) {
         lessons.add(lesson);

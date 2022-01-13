@@ -42,12 +42,7 @@ public class StudentStorage {
     }
 
     public void deleteStudent(Student student) {
-        for (Object o : students.toArray()) {
-            if (o.equals(student)) {
-                students.remove(o);
-                serialize();
-            }
-        }
+        students.remove(student);
     }
 
     private void serialize() {
