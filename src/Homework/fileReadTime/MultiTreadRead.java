@@ -22,16 +22,20 @@ public class MultiTreadRead {
             }
         }
         System.out.println("found lines: " + countOfKeyWord);
-        int numberOfTrad = 2;
+        int numberOfTrad = (int) count / countOfKeyWord.incrementAndGet();
+
         int sizeForTreadLines = strings.size() / numberOfTrad;
         List<String> tread1List = strings.subList(1, sizeForTreadLines);
-        List<String> tread2List = strings.subList(sizeForTreadLines + 1, strings.size());
+        List<String> tread2List = strings.subList(sizeForTreadLines + 1, 2 * sizeForTreadLines);
+        List<String> tread3List = strings.subList(2 * sizeForTreadLines, strings.size());
 
         MyTread myTread = new MyTread(tread1List, keyWord);
         MyTread myTread1 = new MyTread(tread2List, keyWord);
+        MyTread myTread2 = new MyTread(tread3List, keyWord);
         try {
             myTread.join();
             myTread1.join();
+            myTread2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
